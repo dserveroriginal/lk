@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="lv">
+
 <head>
   <meta charset="UTF-8">
   <title>LK Vadi</title>
@@ -10,7 +11,8 @@
       background-color: #cce7f0;
     }
 
-    header, footer {
+    header,
+    footer {
       background-color: #0a3a4a;
       color: white;
       text-align: center;
@@ -61,15 +63,25 @@
       text-align: center;
     }
 
+    .product img {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      background-color: #ddd;
+      display: block;
+      margin: 0 auto 10px;
+    }
+
     .form-box {
       max-width: 300px;
-      margin: auto;
+      margin: 20px auto;
       background: #7ec6db;
       padding: 20px;
       border-radius: 8px;
     }
 
-    .form-box input {
+    .form-box input,
+    .form-box select {
       width: 100%;
       margin-bottom: 10px;
       padding: 8px;
@@ -104,8 +116,27 @@
     .search-box button {
       padding: 5px 10px;
     }
+
+    .wishlist-item,
+    .basket-item {
+      background-color: white;
+      border: 1px solid #ccc;
+      margin: 10px;
+      padding: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .icon-button {
+      background: none;
+      border: none;
+      font-size: 20px;
+      cursor: pointer;
+    }
   </style>
 </head>
+
 <body>
 
   <header>
@@ -114,73 +145,101 @@
 
   <nav>
     <button onclick="navigate('home')">Veikals</button>
-    <button onclick="navigate('custom')">Personalizēts vads vai kabelis</button>
+    <button onclick="navigate('custom')">Personalizēts kabelis</button>
     <button onclick="navigate('profile')">Profils</button>
     <button onclick="navigate('wishlist')">Vēlmju saraksts</button>
+    <button onclick="navigate('basket')">Grozs</button>
     <button onclick="navigate('about')">Par mums</button>
   </nav>
 
-  <!-- Pages -->
+
   <div id="home" class="page active">
     <div class="product-grid">
-      <div class="product">Produkta piemēra attēls<br>Produkta piemērs nosaukums</div>
-      <div class="product">Produkta piemēra attēls<br>Produkta piemērs nosaukums</div>
-      <div class="product">Produkta piemēra attēls<br>Produkta piemērs nosaukums</div>
-      <div class="product">Produkta piemēra attēls<br>Produkta piemērs nosaukums</div>
+      <div class="product">
+        <img src="#" alt="USB kabelis" style="width:150px;height:150px;background:#ddd;">
+        <div>USB kabelis</div>
+      </div>
+      <div class="product">
+        <img src="#" alt="HDMI kabelis" style="width:150px;height:150px;background:#ddd;">
+        <div>HDMI kabelis</div>
+      </div>
+      <div class="product">
+        <img src="#" alt="Strāvas vads" style="width:150px;height:150px;background:#ddd;">
+        <div>Strāvas vads</div>
+      </div>
+      <div class="product">
+        <img src="#" alt="Audio vads" style="width:150px;height:150px;background:#ddd;">
+        <div>Audio vads</div>
+      </div>
+      <div class="product">
+        <img src="#" alt="Ethernet kabelis" style="width:150px;height:150px;background:#ddd;">
+        <div>Ethernet kabelis</div>
+      </div>
+      <div class="product">
+        <img src="#" alt="Telefonvads" style="width:150px;height:150px;background:#ddd;">
+        <div>Telefonvads</div>
+      </div>
+      <div class="product">
+        <img src="#" alt="Lādētājs" style="width:150px;height:150px;background:#ddd;">
+        <div>Lādētājs</div>
+      </div>
+      <div class="product">
+        <img src="#" alt="Adapteris" style="width:150px;height:150px;background:#ddd;">
+        <div>Adapteris</div>
+      </div>
     </div>
   </div>
-
   <div id="about" class="page">
     <h2>Par mums</h2>
     <p>Informācija par uzņēmumu LK Vadi.</p>
   </div>
 
-  <div id="login" class="page">
-    <div class="form-box">
-      <h2>Lietotāja autorizācija</h2>
-      <input type="email" placeholder="Epasts">
-      <input type="password" placeholder="Parole">
-      <button>Autorizēties</button>
-    </div>
-  </div>
-
-  <div id="register" class="page">
-    <div class="form-box">
-      <h2>Profila reģistrācija</h2>
-      <input type="email" placeholder="Epasts">
-      <input type="password" placeholder="Parole">
-      <input type="password" placeholder="Atkārtota parole">
-      <button>Reģistrēties</button>
-    </div>
-  </div>
-
-  <div id="edit-profile" class="page">
-    <div class="form-box">
-      <h2>Profila rediģēšana</h2>
-      <input type="email" placeholder="Epasts">
-      <input type="password" placeholder="Parole">
-      <input type="password" placeholder="Jaunā parole">
-      <button>Saglabāt</button>
+  <div id="profile" class="page">
+    <div class="form-box" id="profileContent"></div>
+    <div class="form-box" id="registerForm" style="display: none;">
+      <h3>Reģistrācija</h3>
+      <input id="registerEmail" type="email" placeholder="Epasts">
+      <input id="registerPassword" type="password" placeholder="Parole">
+      <input id="registerRepeat" type="password" placeholder="Atkārtota parole">
+      <button onclick="register()">Reģistrēties</button>
     </div>
   </div>
 
   <div id="wishlist" class="page">
     <div class="search-box">
-      <input type="text" placeholder="Meklēt">
-      <button>Meklēt</button>
+      <input id="wishlistInput" type="text" placeholder="Jauna prece">
+      <button onclick="addWishlistItem()">Pievienot</button>
     </div>
-    <div class="product-grid">
-      <div class="product">Produkta piemēra attēls</div>
-      <div class="product">Produkta piemēra attēls</div>
-      <div class="product">Produkta piemēra attēls</div>
-    </div>
+    <div id="wishlistItems"></div>
   </div>
 
   <div id="custom" class="page">
-    <h2>Personalizēts vads vai kabelis</h2>
-    <div class="product-grid">
-      <div class="product">Produkta piemēra attēls</div>
+    <div class="form-box">
+      <h2>Pasūtīt pielāgotu kabeli</h2>
+      <label>Garums:</label>
+      <input type="number" placeholder="cm">
+      <label>Krāsa:</label>
+      <select>
+        <option>Sarkans</option>
+        <option>Zils</option>
+      </select>
+      <label>Tips:</label>
+      <select>
+        <option>USB</option>
+        <option>HDMI</option>
+      </select>
+      <label>Piezīmes:</label>
+      <input type="text">
+      <button>Pasūtīt</button>
     </div>
+  </div>
+
+  <div id="basket" class="page">
+    <div class="search-box">
+      <input id="basketInput" type="text" placeholder="Jauna prece">
+      <button onclick="addBasketItem()">Pievienot</button>
+    </div>
+    <div id="basketItems"></div>
   </div>
 
   <footer>
@@ -192,10 +251,142 @@
   </footer>
 
   <script>
+    let loginHTML = "";
+
+    let users = JSON.parse(localStorage.getItem('users') || '{}');
+    const products = ["USB kabelis", "HDMI kabelis", "Strāvas vads", "Audio vads", "Ethernet kabelis", "Telefonvads", "Lādētājs", "Adapteris"];
+
     function navigate(pageId) {
       document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
       document.getElementById(pageId).classList.add('active');
+      if (pageId === 'profile') showProfile();
     }
+
+    function register() {
+      const email = document.getElementById('registerEmail').value;
+      const pass = document.getElementById('registerPassword').value;
+      const repeat = document.getElementById('registerRepeat').value;
+      if (email && pass && pass === repeat) {
+        users[email] = pass;
+        localStorage.setItem('users', JSON.stringify(users));
+        alert('Reģistrācija veiksmīga!');
+        document.getElementById('registerForm').style.display = 'none';
+      } else {
+        alert('Lūdzu, ievadiet korektus datus.');
+      }
+    }
+
+    function login() {
+      const email = document.getElementById('loginEmail').value;
+      const pass = document.getElementById('loginPassword').value;
+      if (users[email] && users[email] === pass) {
+        localStorage.setItem('userEmail', email);
+        alert('Pieslēgšanās veiksmīga!');
+        navigate('profile');
+      } else {
+        alert('Nepareizs epasts vai parole.');
+      }
+    }
+
+    function showProfile() {
+      const email = localStorage.getItem('userEmail');
+      const container = document.getElementById('profileContent');
+
+      if (email) {
+        container.innerHTML = `
+        <h2>Profils</h2>
+        <p>Epasts: ${email}</p>
+        <button onclick="logout()">Atslēgties</button>
+      `;
+      } else {
+        loginHTML = `
+        <h2>Pieteikšanās</h2>
+        <input id='loginEmail' type='email' placeholder='Epasts'>
+        <input id='loginPassword' type='password' placeholder='Parole'>
+        <button onclick='login()'>Autorizēties</button>
+        <button onclick='showRegisterForm()'>Reģistrēties</button>
+      `;
+        container.innerHTML = loginHTML;
+      }
+    }
+
+
+    function showRegisterForm() {
+      document.getElementById('profileContent').innerHTML = `
+    <h3>Reģistrācija</h3>
+    <input id="registerEmail" type="email" placeholder="Epasts">
+    <input id="registerPassword" type="password" placeholder="Parole">
+    <input id="registerRepeat" type="password" placeholder="Atkārtota parole">
+    <button onclick="register()">Reģistrēties</button>
+    <button onclick="cancelRegister()">Atcelt</button>
+  `;
+    }
+
+    function register() {
+      const email = document.getElementById('registerEmail').value;
+      const pass = document.getElementById('registerPassword').value;
+      const repeat = document.getElementById('registerRepeat').value;
+
+      if (email && pass && pass === repeat) {
+        let users = JSON.parse(localStorage.getItem('users') || '{}');
+        users[email] = pass;
+        localStorage.setItem('users', JSON.stringify(users));
+        alert('Reģistrācija veiksmīga!');
+        document.getElementById('profileContent').innerHTML = loginHTML;
+      } else {
+        alert('Lūdzu, ievadiet korektus datus.');
+      }
+    }
+
+    function cancelRegister() {
+      document.getElementById('profileContent').innerHTML = loginHTML;
+    }
+
+
+
+    function logout() {
+      localStorage.removeItem('userEmail');
+      navigate('home');
+    }
+
+    function addWishlistItem() {
+      const input = document.getElementById('wishlistInput');
+      const value = input.value.trim();
+      if (value) {
+        const div = document.createElement('div');
+        div.className = 'wishlist-item';
+        div.innerHTML = `${value} <button class='icon-button' onclick='this.parentElement.remove()'>🗑️</button>`;
+        document.getElementById('wishlistItems').appendChild(div);
+        input.value = '';
+      }
+    }
+
+    function addBasketItem() {
+      const input = document.getElementById('basketInput');
+      const value = input.value.trim();
+      if (value) {
+        const div = document.createElement('div');
+        div.className = 'basket-item';
+        div.innerHTML = `${value} <button class='icon-button' onclick='this.parentElement.remove()'>🗑️</button>`;
+        document.getElementById('basketItems').appendChild(div);
+        input.value = '';
+      }
+    }
+
+    function fillMainPage() {
+      const container = document.getElementById('mainProducts');
+      container.innerHTML = '';
+      products.forEach(name => {
+        const div = document.createElement('div');
+        div.className = 'product';
+        div.innerHTML = `<img src='#' alt='Attēls'><div>${name}</div>`;
+        container.appendChild(div);
+      });
+    }
+
+    fillMainPage();
   </script>
+
 </body>
+
 </html>
