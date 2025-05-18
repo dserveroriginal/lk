@@ -144,6 +144,10 @@
       padding: 10px 20px;
       cursor: pointer;
     }
+
+    .loginBtn {
+      margin: 1%;
+    }
   </style>
 </head>
 
@@ -215,7 +219,7 @@
       <input id="registerEmail" type="email" placeholder="Epasts">
       <input id="registerPassword" type="password" placeholder="Parole">
       <input id="registerRepeat" type="password" placeholder="Atkārtota parole">
-      <button onclick="register()">Reģistrēties</button>
+      <button class="loginBtn" onclick="register()">Reģistrēties</button>
     </div>
   </div>
 
@@ -298,6 +302,9 @@
   <script>
     let loginHTML = "";
 
+    let defaultLoginEmail = "Admin@mail.com";
+    let defaultLoginPassword = "Admin123" 
+
     let users = JSON.parse(localStorage.getItem('users') || '{}');
     const products = ["USB kabelis", "HDMI kabelis", "Strāvas vads", "Audio vads", "Ethernet kabelis", "Telefonvads", "Lādētājs", "Adapteris"];
 
@@ -324,7 +331,8 @@
     function login() {
       const email = document.getElementById('loginEmail').value;
       const pass = document.getElementById('loginPassword').value;
-      if (users[email] && users[email] === pass) {
+      // if (users[email] && users[email] === pass) {
+      if (email === defaultLoginEmail && pass === defaultLoginPassword) {
         localStorage.setItem('userEmail', email);
         alert('Pieslēgšanās veiksmīga!');
         navigate('profile');
@@ -348,8 +356,8 @@
         <h2>Pieteikšanās</h2>
         <input id='loginEmail' type='email' placeholder='Epasts'>
         <input id='loginPassword' type='password' placeholder='Parole'>
-        <button onclick='login()'>Autorizēties</button>
-        <button onclick='showRegisterForm()'>Reģistrēties</button>
+        <button class="loginBtn" onclick='login()'>Autorizēties</button>
+        <button class="loginBtn" onclick='showRegisterForm()'>Reģistrēties</button>
       `;
         container.innerHTML = loginHTML;
       }
@@ -362,8 +370,8 @@
     <input id="registerEmail" type="email" placeholder="Epasts">
     <input id="registerPassword" type="password" placeholder="Parole">
     <input id="registerRepeat" type="password" placeholder="Atkārtota parole">
-    <button onclick="register()">Reģistrēties</button>
-    <button onclick="cancelRegister()">Atcelt</button>
+    <button class="loginBtn" onclick="register()">Reģistrēties</button>
+    <button class="loginBtn" onclick="cancelRegister()">Atcelt</button>
   `;
     }
 
