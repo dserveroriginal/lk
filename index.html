@@ -82,9 +82,11 @@
 
     .form-box input,
     .form-box select {
+      flex: 1;
       width: 100%;
       margin-bottom: 10px;
       padding: 8px;
+      box-sizing: border-box;
     }
 
     .form-box button {
@@ -132,6 +134,14 @@
       background: none;
       border: none;
       font-size: 20px;
+      cursor: pointer;
+    }
+
+    .footerBtn {
+      background-color: #0a3a4a;
+      color: white;
+      border: none;
+      padding: 10px 20px;
       cursor: pointer;
     }
   </style>
@@ -191,7 +201,11 @@
   </div>
   <div id="about" class="page">
     <h2>Par mums</h2>
-    <p>Informācija par uzņēmumu LK Vadi.</p>
+    <p style="width: 50%">LK Vadi ir interneta veikals, kas specializējas vadu un kabeļu jomā, 
+      piedāvājot klientiem plašu preču klāstu, kā arī iespēju izveidot pielāgotus vadus un kabeļus, 
+      kas nepieciešami viņu vajadzībām. Platforma, kas paredzēta IT profesionāļiem, elektriķiem un citām personām, 
+      kurām nepieciešami augstas kvalitātes vadi un kabeļi, 
+      nodrošina nevainojamu iepirkšanās pieredzi ar uzlabotām šķirošanas un atlases funkcijām. </p>
   </div>
 
   <div id="profile" class="page">
@@ -210,27 +224,58 @@
       <input id="wishlistInput" type="text" placeholder="Jauna prece">
       <button onclick="addWishlistItem()">Pievienot</button>
     </div>
-    <div id="wishlistItems"></div>
+    <div id="wishlistItems">
+    </div>
   </div>
 
   <div id="custom" class="page">
     <div class="form-box">
-      <h2>Pasūtīt pielāgotu kabeli</h2>
-      <label>Garums:</label>
-      <input type="number" placeholder="cm">
-      <label>Krāsa:</label>
-      <select>
-        <option>Sarkans</option>
-        <option>Zils</option>
-      </select>
-      <label>Tips:</label>
-      <select>
-        <option>USB</option>
-        <option>HDMI</option>
-      </select>
-      <label>Piezīmes:</label>
-      <input type="text">
-      <button>Pasūtīt</button>
+      <h2>Vada vai kabeļa izveide</h2>
+
+      <div>
+        <label for="side-a">Puse A:</label>
+        <select id="side-a">
+          <option>USB-C</option>
+          <option>USB-A</option>
+          <option>Micro USB</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="side-b">Puse B:</label>
+        <select id="side-b">
+          <option>USB-C</option>
+          <option>USB-A</option>
+          <option>Micro USB</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="material">Materiāls:</label>
+        <select id="material">
+          <option>Vara</option>
+          <option>Alumīnijs</option>
+          <option>Tērauds</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="color">Krāsa:</label>
+        <select id="color">
+          <option>Sarkana</option>
+          <option>Zila</option>
+          <option>Melna</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="length">Garums:</label>
+        <input type="text" id="length" value="1.8 M">
+      </div>
+
+      <button>Pievienot grozam</button>
+
+      </div>
     </div>
   </div>
 
@@ -244,8 +289,8 @@
 
   <footer>
     <div class="footer-nav">
-      <button onclick="navigate('about')">Par mums</button>
-      <button onclick="alert('Kontaktinformācija: info@lkvadi.lv')">Kontakti</button>
+      <button class="footerBtn" onclick="navigate('about')">Par mums</button>
+      <button class="footerBtn" onclick="alert('Kontaktinformācija: info@lkvadi.lv')">Kontakti</button>
     </div>
     <p>&copy; 2025 LK Vadi</p>
   </footer>
